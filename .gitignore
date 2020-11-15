@@ -1,0 +1,12 @@
+# Dependency directories
+node_modules/
+
+# next.js build output
+.next
+.idea
+.git
+
+
+# production server output
+out
+.env

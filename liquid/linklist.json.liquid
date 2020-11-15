@@ -1,0 +1,423 @@
+{%- layout none -%}
+
+{%- capture result -%}
+{
+  {%- for linklist in linklists -%}
+  {%- unless linklist.handle contains 'legacy' -%}
+  {{- linklist.handle | json -}}: [
+  {%- for link in linklist.links -%}
+  {
+    {%- if link.levels != 0 -%}"levels": {{- link.levels | json -}},{%- endif -%}
+    {%- if link.levels != 0 -%}"links": [
+      {%- for sub_link in link.links -%}
+      {
+        {%- if sub_link.levels != 0 -%}"levels": {{- sub_link.levels | json -}},{%- endif -%}
+        {%- if sub_link.levels != 0 -%}"links": [
+          {%- for sub_sub_link in sub_link.links -%}
+          {
+            {%- if sub_sub_link.levels != 0 -%}"levels": {{- sub_sub_link.levels | json -}},{%- endif -%}
+            {%- if sub_sub_link.levels != 0 -%}"links": [
+              {%- for sub_sub_sub_link in sub_sub_link.links -%}
+              window.linklists[{{- linklist.handle | json -}}][{{- i1 -}}].links[{{- i2 -}}].links[{{- i3 -}}].links.push({
+                {%- if sub_sub_sub_link.levels != 0 -%}"levels": {{- sub_sub_sub_link.levels | json -}},{%- endif -%}
+                {%- case sub_sub_sub_link.type -%}
+                {%- when 'product_link' -%}
+                "object": {
+                  "available": {{- sub_sub_sub_link.object.available |  json -}},
+                  "collections": {{- sub_sub_sub_link.object.collections | json -}},
+                  "compare_at_price": {{- sub_sub_sub_link.object.compare_at_price | json -}},
+                  "compare_at_price_max": {{- sub_sub_sub_link.object.compare_at_price_max | json -}},
+                  "compare_at_price_min": {{- sub_sub_sub_link.object.compare_at_price_min | json -}},
+                  "compre_at_price_varies": {{- sub_sub_sub_link.object.compare_at_price_varies | json -}},
+                  "content": {{- sub_sub_sub_link.object.content | json -}},
+                  "created_at": "{{- sub_sub_sub_link.object.created_at -}}",
+                  "description": {{- sub_sub_sub_link.object.description | json -}},
+                  "featured_image": {{- sub_sub_sub_link.object.featured_image | json -}},
+                  "featured_media": {{- sub_sub_sub_link.object.featured_media | json -}},
+                  "first_available_variant": {{- sub_sub_sub_link.object.first_available_variant | json -}},
+                  "handle": {{- sub_sub_sub_link.object.handle | json -}},
+                  "has_only_default_variant": {{- sub_sub_sub_link.object.has_only_default_variant | json -}},
+                  "id": {{- sub_sub_sub_link.object.id | json -}},
+                  "images": {{- sub_sub_sub_link.object.images | json -}},
+                  "media": {{- sub_sub_sub_link.object.media | json -}},
+                  "options": {{- sub_sub_sub_link.object.options | json -}},
+                  "options_by_name": {{- sub_sub_sub_link.object.options_by_name | json -}},
+                  "options_with_values": {{- sub_sub_sub_link.object.options_with_values | json -}},
+                  "price": {{- sub_sub_sub_link.object.price | json -}},
+                  "price_max": {{- sub_sub_sub_link.object.price_max | json -}},
+                  "price_min": {{- sub_sub_sub_link.object.price_min | json -}},
+                  "price_varies": {{- sub_sub_sub_link.object.price_varies | json -}},
+                  "published_at": "{{- sub_sub_sub_link.object.published_at -}}",
+                  "requires_selling_plan": {{- sub_sub_sub_link.object.requires_selling_plan | json -}},
+                  "selected_variant": {{- sub_sub_sub_link.object.selected_variant | json -}},
+                  "selected_or_first_available_variant": {{- sub_sub_sub_link.object.selected_or_first_available_variant | json -}},
+                  "selected_of_first_available_selling_plan_allocation": {{- sub_sub_sub_link.object.selected_of_first_available_selling_plan_allocation | json -}},
+                  "selected_selling_plan": {{- sub_sub_sub_link.object.selected_selling_plan | json -}},
+                  "selected_selling_plan_allocation": {{- sub_sub_sub_link.object.selected_selling_plan_allocation | json -}},
+                  "selling_plan_groups": {{- sub_sub_sub_link.object.selling_plan_groups |  json -}},
+                  "tags": {{- sub_sub_sub_link.object.tags | json -}},
+                  "template_suffix": {{- sub_sub_sub_link.object.template_suffix |  json -}},
+                  "title": {{- sub_sub_sub_link.object.title |  json -}},
+                  "type": {{- sub_sub_sub_link.object.type |  json -}},
+                  "url": {{- sub_sub_sub_link.object.url |  json -}},
+                  "variants": {{- sub_sub_sub_link.object.variants |  json -}},
+                  "vendor": {{- sub_sub_sub_link.object.vendor | json -}}
+                },
+                {%- when 'collection_link' -%}
+                "object": {
+                  "all_tags": {{- sub_sub_sub_link.object.all_tags |  json -}},
+                  "all_types": {{- sub_sub_sub_link.object.all_types | json -}},
+                  "all_vendors": {{- sub_sub_sub_link.object.all_vendors | json -}},
+                  "current_type": {{- sub_sub_sub_link.object.current_type | json -}},
+                  "current_vendor": {{- sub_sub_sub_link.object.current_vendor | json -}},
+                  "default_sort_by": {{- sub_sub_sub_link.object.default_sort_by | json -}},
+                  "description": {{- sub_sub_sub_link.object.description | json -}},
+                  "handle": {{- sub_sub_sub_link.object.handle | json -}},
+                  "id": {{- sub_sub_sub_link.object.id | json -}},
+                  "image": {{- sub_sub_sub_link.object.image | json -}},
+                  "next_product": {{- sub_sub_sub_link.object.next_product | json -}},
+                  "previous_product": {{- sub_sub_sub_link.object.previous_product | json -}},
+                  "products": {{- sub_sub_sub_link.object.products | json -}},
+                  "products_count": {{- sub_sub_sub_link.object.products_count | json -}},
+                  "published_at": "{{- sub_sub_sub_link.object.published_at -}}",
+                  "sort_by": {{- sub_sub_sub_link.object.sort_by | json -}},
+                  "sort_options": {{- sub_sub_sub_link.object.sort_options | json -}},
+                  "template_suffix": {{- sub_sub_sub_link.object.template_suffix | json -}},
+                  "title": {{- sub_sub_sub_link.object.title | json -}},
+                  "tags": {{- sub_sub_sub_link.object.tags | json -}},
+                  "url": {{- sub_sub_sub_link.object.url | json -}}
+                },
+                {%- when 'page_link' -%}
+                "object": {
+                  "author": {{- sub_sub_sub_link.object.author |  json -}},
+                  "content": {{- sub_sub_sub_link.object.content | json -}},
+                  "handle": {{- sub_sub_sub_link.object.handle | json -}},
+                  "id": {{- sub_sub_sub_link.object.id | json -}},
+                  "published_at": "{{- sub_sub_sub_link.object.published_at -}}",
+                  "template_suffix": {{- sub_sub_sub_link.object.template_suffix | json -}},
+                  "title": {{- sub_sub_sub_link.object.title | json -}},
+                  "url": {{- sub_sub_sub_link.object.url | json -}}
+                },
+                {%- when 'blog_link' -%}
+                "object": {
+                  "articles": {{- sub_sub_sub_link.object.articles |  json -}},
+                  "articles_count": {{- sub_sub_sub_link.object.articles_count | json -}},
+                  "comments_enabled": {{- blogsub_sub_sub_link.object.comments_enabled | json -}},
+                  "handle": {{- sub_sub_sub_link.object.handle | json -}},
+                  "id": {{- sub_sub_sub_link.object.id | json -}},
+                  "moderated": {{- blogsub_sub_sub_link.object.moderated | json -}},
+                  "next_article": {{- sub_sub_sub_link.object.next_article | json -}},
+                  "previous_article": {{- sub_sub_sub_link.object.previous_article | json -}},
+                  "tags": {{- sub_sub_sub_link.object.tags | json -}},
+                  "title": {{- sub_sub_sub_link.object.title | json -}},
+                  "url": {{- sub_sub_sub_link.object.url | json -}}
+                },
+                {%- endcase -%}
+                "title": {{- sub_sub_sub_link.title | json -}},
+                "type": {{- sub_sub_sub_link.type | json -}},
+                "url": {{- sub_sub_sub_link.url | json -}}
+              }{%- unless forloop.last -%},{%- endunless -%}
+              {%- endfor -%}
+            ],{%- endif -%}
+            {%- case sub_sub_link.type -%}
+            {%- when 'product_link' -%}
+            "object": {
+              "available": {{- sub_sub_link.object.available |  json -}},
+              "collections": {{- sub_sub_link.object.collections | json -}},
+              "compare_at_price": {{- sub_sub_link.object.compare_at_price | json -}},
+              "compare_at_price_max": {{- sub_sub_link.object.compare_at_price_max | json -}},
+              "compare_at_price_min": {{- sub_sub_link.object.compare_at_price_min | json -}},
+              "compre_at_price_varies": {{- sub_sub_link.object.compare_at_price_varies | json -}},
+              "content": {{- sub_sub_link.object.content | json -}},
+              "created_at": "{{- sub_sub_link.object.created_at -}}",
+              "description": {{- sub_sub_link.object.description | json -}},
+              "featured_image": {{- sub_sub_link.object.featured_image | json -}},
+              "featured_media": {{- sub_sub_link.object.featured_media | json -}},
+              "first_available_variant": {{- sub_sub_link.object.first_available_variant | json -}},
+              "handle": {{- sub_sub_link.object.handle | json -}},
+              "has_only_default_variant": {{- sub_sub_link.object.has_only_default_variant | json -}},
+              "id": {{- sub_sub_link.object.id | json -}},
+              "images": {{- sub_sub_link.object.images | json -}},
+              "media": {{- sub_sub_link.object.media | json -}},
+              "options": {{- sub_sub_link.object.options | json -}},
+              "options_by_name": {{- sub_sub_link.object.options_by_name | json -}},
+              "options_with_values": {{- sub_sub_link.object.options_with_values | json -}},
+              "price": {{- sub_sub_link.object.price | json -}},
+              "price_max": {{- sub_sub_link.object.price_max | json -}},
+              "price_min": {{- sub_sub_link.object.price_min | json -}},
+              "price_varies": {{- sub_sub_link.object.price_varies | json -}},
+              "published_at": "{{- sub_sub_link.object.published_at -}}",
+              "requires_selling_plan": {{- sub_sub_link.object.requires_selling_plan | json -}},
+              "selected_variant": {{- sub_sub_link.object.selected_variant | json -}},
+              "selected_or_first_available_variant": {{- sub_sub_link.object.selected_or_first_available_variant | json -}},
+              "selected_of_first_available_selling_plan_allocation": {{- sub_sub_link.object.selected_of_first_available_selling_plan_allocation | json -}},
+              "selected_selling_plan": {{- sub_sub_link.object.selected_selling_plan | json -}},
+              "selected_selling_plan_allocation": {{- sub_sub_link.object.selected_selling_plan_allocation | json -}},
+              "selling_plan_groups": {{- sub_sub_link.object.selling_plan_groups |  json -}},
+              "tags": {{- sub_sub_link.object.tags | json -}},
+              "template_suffix": {{- sub_sub_link.object.template_suffix |  json -}},
+              "title": {{- sub_sub_link.object.title |  json -}},
+              "type": {{- sub_sub_link.object.type |  json -}},
+              "url": {{- sub_sub_link.object.url |  json -}},
+              "variants": {{- sub_sub_link.object.variants |  json -}},
+              "vendor": {{- sub_sub_link.object.vendor | json -}}
+            },
+            {%- when 'collection_link' -%}
+            "object": {
+              "all_tags": {{- sub_sub_link.object.all_tags |  json -}},
+              "all_types": {{- sub_sub_link.object.all_types | json -}},
+              "all_vendors": {{- sub_sub_link.object.all_vendors | json -}},
+              "current_type": {{- sub_sub_link.object.current_type | json -}},
+              "current_vendor": {{- sub_sub_link.object.current_vendor | json -}},
+              "default_sort_by": {{- sub_sub_link.object.default_sort_by | json -}},
+              "description": {{- sub_sub_link.object.description | json -}},
+              "handle": {{- sub_sub_link.object.handle | json -}},
+              "id": {{- sub_sub_link.object.id | json -}},
+              "image": {{- sub_sub_link.object.image | json -}},
+              "next_product": {{- sub_sub_link.object.next_product | json -}},
+              "previous_product": {{- sub_sub_link.object.previous_product | json -}},
+              "products": {{- sub_sub_link.object.products | json -}},
+              "products_count": {{- sub_sub_link.object.products_count | json -}},
+              "published_at": "{{- sub_sub_link.object.published_at -}}",
+              "sort_by": {{- sub_sub_link.object.sort_by | json -}},
+              "sort_options": {{- sub_sub_link.object.sort_options | json -}},
+              "template_suffix": {{- sub_sub_link.object.template_suffix | json -}},
+              "title": {{- sub_sub_link.object.title | json -}},
+              "tags": {{- sub_sub_link.object.tags | json -}},
+              "url": {{- sub_sub_link.object.url | json -}}
+            },
+            {%- when 'page_link' -%}
+            "object": {
+              "author": {{- sub_sub_link.object.author |  json -}},
+              "content": {{- sub_sub_link.object.content | json -}},
+              "handle": {{- sub_sub_link.object.handle | json -}},
+              "id": {{- sub_sub_link.object.id | json -}},
+              "published_at": "{{- sub_sub_link.object.published_at -}}",
+              "template_suffix": {{- sub_sub_link.object.template_suffix | json -}},
+              "title": {{- sub_sub_link.object.title | json -}},
+              "url": {{- sub_sub_link.object.url | json -}}
+            },
+            {%- when 'blog_link' -%}
+            "object": {
+              "articles": {{- sub_sub_link.object.articles |  json -}},
+              "articles_count": {{- sub_sub_link.object.articles_count | json -}},
+              "comments_enabled": {{- blogsub_sub_link.object.comments_enabled | json -}},
+              "handle": {{- sub_sub_link.object.handle | json -}},
+              "id": {{- sub_sub_link.object.id | json -}},
+              "moderated": {{- blogsub_sub_link.object.moderated | json -}},
+              "next_article": {{- sub_sub_link.object.next_article | json -}},
+              "previous_article": {{- sub_sub_link.object.previous_article | json -}},
+              "tags": {{- sub_sub_link.object.tags | json -}},
+              "title": {{- sub_sub_link.object.title | json -}},
+              "url": {{- sub_sub_link.object.url | json -}}
+            },
+            {%- endcase -%}
+            "title": {{- sub_sub_link.title | json -}},
+            "type": {{- sub_sub_link.type | json -}},
+            "url": {{- sub_sub_link.url | json -}}
+          }{%- unless forloop.last -%},{%- endunless -%}
+
+          {%- endfor -%}
+        ],{%- endif -%}
+        {%- case sub_link.type -%}
+        {%- when 'product_link' -%}
+        "object": {
+          "available": {{- sub_link.object.available |  json -}},
+          "collections": {{- sub_link.object.collections | json -}},
+          "compare_at_price": {{- sub_link.object.compare_at_price | json -}},
+          "compare_at_price_max": {{- sub_link.object.compare_at_price_max | json -}},
+          "compare_at_price_min": {{- sub_link.object.compare_at_price_min | json -}},
+          "compre_at_price_varies": {{- sub_link.object.compare_at_price_varies | json -}},
+          "content": {{- sub_link.object.content | json -}},
+          "created_at": "{{- sub_link.object.created_at -}}",
+          "description": {{- sub_link.object.description | json -}},
+          "featured_image": {{- sub_link.object.featured_image | json -}},
+          "featured_media": {{- sub_link.object.featured_media | json -}},
+          "first_available_variant": {{- sub_link.object.first_available_variant | json -}},
+          "handle": {{- sub_link.object.handle | json -}},
+          "has_only_default_variant": {{- sub_link.object.has_only_default_variant | json -}},
+          "id": {{- sub_link.object.id | json -}},
+          "images": {{- sub_link.object.images | json -}},
+          "media": {{- sub_link.object.media | json -}},
+          "options": {{- sub_link.object.options | json -}},
+          "options_by_name": {{- sub_link.object.options_by_name | json -}},
+          "options_with_values": {{- sub_link.object.options_with_values | json -}},
+          "price": {{- sub_link.object.price | json -}},
+          "price_max": {{- sub_link.object.price_max | json -}},
+          "price_min": {{- sub_link.object.price_min | json -}},
+          "price_varies": {{- sub_link.object.price_varies | json -}},
+          "published_at": "{{- sub_link.object.published_at -}}",
+          "requires_selling_plan": {{- sub_link.object.requires_selling_plan | json -}},
+          "selected_variant": {{- sub_link.object.selected_variant | json -}},
+          "selected_or_first_available_variant": {{- sub_link.object.selected_or_first_available_variant | json -}},
+          "selected_of_first_available_selling_plan_allocation": {{- sub_link.object.selected_of_first_available_selling_plan_allocation | json -}},
+          "selected_selling_plan": {{- sub_link.object.selected_selling_plan | json -}},
+          "selected_selling_plan_allocation": {{- sub_link.object.selected_selling_plan_allocation | json -}},
+          "selling_plan_groups": {{- sub_link.object.selling_plan_groups |  json -}},
+          "tags": {{- sub_link.object.tags | json -}},
+          "template_suffix": {{- sub_link.object.template_suffix |  json -}},
+          "title": {{- sub_link.object.title |  json -}},
+          "type": {{- sub_link.object.type |  json -}},
+          "url": {{- sub_link.object.url |  json -}},
+          "variants": {{- sub_link.object.variants |  json -}},
+          "vendor": {{- sub_link.object.vendor | json -}}
+        },
+        {%- when 'collection_link' -%}
+        "object": {
+          "all_tags": {{- sub_link.object.all_tags |  json -}},
+          "all_types": {{- sub_link.object.all_types | json -}},
+          "all_vendors": {{- sub_link.object.all_vendors | json -}},
+          "current_type": {{- sub_link.object.current_type | json -}},
+          "current_vendor": {{- sub_link.object.current_vendor | json -}},
+          "default_sort_by": {{- sub_link.object.default_sort_by | json -}},
+          "description": {{- sub_link.object.description | json -}},
+          "handle": {{- sub_link.object.handle | json -}},
+          "id": {{- sub_link.object.id | json -}},
+          "image": {{- sub_link.object.image | json -}},
+          "next_product": {{- sub_link.object.next_product | json -}},
+          "previous_product": {{- sub_link.object.previous_product | json -}},
+          "products": {{- sub_link.object.products | json -}},
+          "products_count": {{- sub_link.object.products_count | json -}},
+          "published_at": "{{- sub_link.object.published_at -}}",
+          "sort_by": {{- sub_link.object.sort_by | json -}},
+          "sort_options": {{- sub_link.object.sort_options | json -}},
+          "template_suffix": {{- sub_link.object.template_suffix | json -}},
+          "title": {{- sub_link.object.title | json -}},
+          "tags": {{- sub_link.object.tags | json -}},
+          "url": {{- sub_link.object.url | json -}}
+        },
+        {%- when 'page_link' -%}
+        "object": {
+          "author": {{- sub_link.object.author |  json -}},
+          "content": {{- sub_link.object.content | json -}},
+          "handle": {{- sub_link.object.handle | json -}},
+          "id": {{- sub_link.object.id | json -}},
+          "published_at": "{{- sub_link.object.published_at -}}",
+          "template_suffix": {{- sub_link.object.template_suffix | json -}},
+          "title": {{- sub_link.object.title | json -}},
+          "url": {{- sub_link.object.url | json -}}
+        },
+        {%- when 'blog_link' -%}
+        "object": {
+          "articles": {{- sub_link.object.articles |  json -}},
+          "articles_count": {{- sub_link.object.articles_count | json -}},
+          "comments_enabled": {{- blogsub_link.object.comments_enabled | json -}},
+          "handle": {{- sub_link.object.handle | json -}},
+          "id": {{- sub_link.object.id | json -}},
+          "moderated": {{- blogsub_link.object.moderated | json -}},
+          "next_article": {{- sub_link.object.next_article | json -}},
+          "previous_article": {{- sub_link.object.previous_article | json -}},
+          "tags": {{- sub_link.object.tags | json -}},
+          "title": {{- sub_link.object.title | json -}},
+          "url": {{- sub_link.object.url | json -}}
+        },
+        {%- endcase -%}
+        "title": {{- sub_link.title | json -}},
+        "type": {{- sub_link.type | json -}},
+        "url": {{- sub_link.url | json -}}
+      }{%- unless forloop.last -%},{%- endunless -%}
+
+      {%- endfor -%}
+    ],{%- endif -%}
+    {%- case link.type -%}
+    {%- when 'product_link' -%}
+    "object": {
+      "available": {{- link.object.available |  json -}},
+      "collections": {{- link.object.collections | json -}},
+      "compare_at_price": {{- link.object.compare_at_price | json -}},
+      "compare_at_price_max": {{- link.object.compare_at_price_max | json -}},
+      "compare_at_price_min": {{- link.object.compare_at_price_min | json -}},
+      "compre_at_price_varies": {{- link.object.compare_at_price_varies | json -}},
+      "content": {{- link.object.content | json -}},
+      "created_at": "{{- link.object.created_at -}}",
+      "description": {{- link.object.description | json -}},
+      "featured_image": {{- link.object.featured_image | json -}},
+      "featured_media": {{- link.object.featured_media | json -}},
+      "first_available_variant": {{- link.object.first_available_variant | json -}},
+      "handle": {{- link.object.handle | json -}},
+      "has_only_default_variant": {{- link.object.has_only_default_variant | json -}},
+      "id": {{- link.object.id | json -}},
+      "images": {{- link.object.images | json -}},
+      "media": {{- link.object.media | json -}},
+      "options": {{- link.object.options | json -}},
+      "options_by_name": {{- link.object.options_by_name | json -}},
+      "options_with_values": {{- link.object.options_with_values | json -}},
+      "price": {{- link.object.price | json -}},
+      "price_max": {{- link.object.price_max | json -}},
+      "price_min": {{- link.object.price_min | json -}},
+      "price_varies": {{- link.object.price_varies | json -}},
+      "published_at": "{{- link.object.published_at -}}",
+      "requires_selling_plan": {{- link.object.requires_selling_plan | json -}},
+      "selected_variant": {{- link.object.selected_variant | json -}},
+      "selected_or_first_available_variant": {{- link.object.selected_or_first_available_variant | json -}},
+      "selected_of_first_available_selling_plan_allocation": {{- link.object.selected_of_first_available_selling_plan_allocation | json -}},
+      "selected_selling_plan": {{- link.object.selected_selling_plan | json -}},
+      "selected_selling_plan_allocation": {{- link.object.selected_selling_plan_allocation | json -}},
+      "selling_plan_groups": {{- link.object.selling_plan_groups |  json -}},
+      "tags": {{- link.object.tags | json -}},
+      "template_suffix": {{- link.object.template_suffix |  json -}},
+      "title": {{- link.object.title |  json -}},
+      "type": {{- link.object.type |  json -}},
+      "url": {{- link.object.url |  json -}},
+      "variants": {{- link.object.variants |  json -}},
+      "vendor": {{- link.object.vendor | json -}}
+    },
+    {%- when 'collection_link' -%}
+    "object": {
+      "all_tags": {{- link.object.all_tags |  json -}},
+      "all_types": {{- link.object.all_types | json -}},
+      "all_vendors": {{- link.object.all_vendors | json -}},
+      "current_type": {{- link.object.current_type | json -}},
+      "current_vendor": {{- link.object.current_vendor | json -}},
+      "default_sort_by": {{- link.object.default_sort_by | json -}},
+      "description": {{- link.object.description | json -}},
+      "handle": {{- link.object.handle | json -}},
+      "id": {{- link.object.id | json -}},
+      "image": {{- link.object.image | json -}},
+      "next_product": {{- link.object.next_product | json -}},
+      "previous_product": {{- link.object.previous_product | json -}},
+      "products": {{- link.object.products | json -}},
+      "products_count": {{- link.object.products_count | json -}},
+      "published_at": "{{- link.object.published_at -}}",
+      "sort_by": {{- link.object.sort_by | json -}},
+      "sort_options": {{- link.object.sort_options | json -}},
+      "template_suffix": {{- link.object.template_suffix | json -}},
+      "title": {{- link.object.title | json -}},
+      "tags": {{- link.object.tags | json -}},
+      "url": {{- link.object.url | json -}}
+    },
+    {%- when 'page_link' -%}
+    "object": {
+      "author": {{- link.object.author |  json -}},
+      "content": {{- link.object.content | json -}},
+      "handle": {{- link.object.handle | json -}},
+      "id": {{- link.object.id | json -}},
+      "published_at": "{{- link.object.published_at -}}",
+      "template_suffix": {{- link.object.template_suffix | json -}},
+      "title": {{- link.object.title | json -}},
+      "url": {{- link.object.url | json -}}
+    },
+    {%- when 'blog_link' -%}
+    "object": {
+      "articles": {{- link.object.articles |  json -}},
+      "articles_count": {{- link.object.articles_count | json -}},
+      "comments_enabled": {{- bloglink.object.comments_enabled | json -}},
+      "handle": {{- link.object.handle | json -}},
+      "id": {{- link.object.id | json -}},
+      "moderated": {{- bloglink.object.moderated | json -}},
+      "next_article": {{- link.object.next_article | json -}},
+      "previous_article": {{- link.object.previous_article | json -}},
+      "tags": {{- link.object.tags | json -}},
+      "title": {{- link.object.title | json -}},
+      "url": {{- link.object.url | json -}}
+    },
+    {%- endcase -%}
+    "title": {{- link.title | json -}},
+    "type": {{- link.type | json -}},
+    "url": {{- link.url | json -}}
+  }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]{%- unless forloop.last -%},{%- endunless -%}{%- endunless -%}{%- endfor -%}}{%- endcapture -%}
+
+{%- assign final = result | replace: '],}', ']}' -%}
+{{- final -}}
