@@ -26,7 +26,7 @@ module.exports = withPlugins(
             },
           },
         },
-        fs.readdirSync(path.join(process.cwd(), 'styles')).filter((file) => file.match(/^_.*\.scss$/)).length > 0 ? {
+        /*fs.readdirSync(path.join(process.cwd(), 'styles')).filter((file) => file.match(/^_.*\.scss$/)).length > 0 ? {
           enforce: 'pre',
           test: /.scss$/,
           loader: 'sass-resources-loader',
@@ -38,7 +38,7 @@ module.exports = withPlugins(
                 .map((file) => `./styles/${file}`),
 
           },
-        } : {},
+        } : {},*/
       );
 
       config.resolve.extensions = ['.ts', '.js', '.jsx', '.tsx', '.svg', '.scss'];
