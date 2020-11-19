@@ -59,8 +59,6 @@ export const Root: FC<RootProps> = ({ pageProps, Component, linklist }) => {
 
 
 export const getStaticProps: GetStaticProps = async() => {
-
-  
   let linklist
   try {
     const res = await fetch(`https://liquix-react.myshopify.com/index.json/?view=json`, {
