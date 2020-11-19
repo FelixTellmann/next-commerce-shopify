@@ -70,7 +70,6 @@ export const getStaticProps: GetStaticProps = async() => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'User-Agent': 'PostmanRuntime/7.26.5'
       },
       mode: "no-cors",
       referrerPolicy: "no-referrer"
