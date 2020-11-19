@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async() => {
       credentials: "include",
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://next-commerce-shopify.vercel.app',
+        'Access-Control-Allow-Origin': '*',
       },
       mode: "no-cors",
       referrerPolicy: "no-referrer"
